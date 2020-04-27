@@ -1,1 +1,1 @@
-# Snake
+# Dino Game
