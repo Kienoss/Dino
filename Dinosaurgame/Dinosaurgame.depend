@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1588091137 source:e:\codeblock\project\dinosaurgame\dino.cpp
+	<iostream>
+	<string>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	<stdio.h>
+
