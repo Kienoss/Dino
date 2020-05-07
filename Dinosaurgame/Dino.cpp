@@ -251,7 +251,7 @@
     }
     //--------------------------------------------------------
     void update(){
-         if((dino.x+dino.w<cactus.x || dino.y+dino.h<cactus.y)&&(dino.x+dino.w<cactus2.x || dino.y+dino.h<cactus2.y)){
+         if((dino.x+dino.w<cactus.x +10 || dino.y+dino.h<cactus.y)&&(dino.x+dino.w<cactus2.x +10 || dino.y+dino.h<cactus2.y)){
             collide = false;
         }
         else{collide = true;}
