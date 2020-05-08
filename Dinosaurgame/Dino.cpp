@@ -1,4 +1,4 @@
-    #include <iostream>
+ #include <iostream>
     #include <string>
     #include <SDL.h>
     #include <SDL_image.h>
@@ -24,6 +24,7 @@
     SDL_Texture* tex=nullptr;
     bool isHighest;
     bool collide;
+    bool pause= true;
     Mix_Chunk *jumpsound = nullptr;
     //--------------------------------------------------------
 
@@ -154,15 +155,28 @@
             Mix_CloseAudio();
         }
     //--------------------------------------------------------
-    void draw(){
-        //render back ground white
+    void drawbackground(){
+         //render back ground white
         SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
         SDL_Rect rect;
         rect.x=rect.y=0;
         rect.w=WIDTH;
         rect.h=HEIGHT;
         SDL_RenderFillRect(ren, &rect);
+    }
+    //----------------------------------------------------------
+    void draw(){
+        drawbackground();
+        //pause screen until press S
+        if(pause == true){
+            drawbackground();
+            dino.render(ren);
+            ground.render(ren);
+            //cactus.render(ren);
+            SDL_RenderPresent(ren);
+        }
         //draw dino-------------------------------------------------------------
+    if (pause == false){
         if(isJumping== false && isFalling==false && isBottom == true){
         dino.render(ren);
         }
@@ -230,6 +244,7 @@
         //draw Sky---------------------------------------------------------------
 
         SDL_RenderPresent(ren);
+    }
 
     }
     //--------------------------------------------------------
@@ -238,6 +253,7 @@
             if( event.type == SDL_QUIT ) running = false;
             if( event.type == SDL_KEYDOWN ) {
                 if( event.key.keysym.sym == SDLK_ESCAPE ) running = false;
+                 if( event.key.keysym.sym == SDLK_SPACE ) pause = false;
                 if( event.key.keysym.sym == SDLK_SPACE ) {
                         sound_jump();
                     if(isBottom && !isJumping){
@@ -276,11 +292,14 @@
         Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
         SDL_CreateWindowAndRenderer(WIDTH,HEIGHT,0,&win,&ren);
         SDL_SetWindowTitle(win, "Dinosaur Game");
-        running = true;
+        running =true;
+        pause = true;
+
         while (running){
             input();
             update();
             draw();
+
         }
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
@@ -288,4 +307,5 @@
         IMG_Quit();
         //Mix_Quit();
         SDL_Quit();
+
     }
