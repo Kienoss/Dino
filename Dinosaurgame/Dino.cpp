@@ -127,7 +127,7 @@
     };
     cactus_number_2 cactus2;
     //--------------------------------------------------------
-    void printScore(){              //make window not responding for some reason
+    void printScore(){ 
     TTF_Font *font = TTF_OpenFont("data/sans.ttf", 24);
     SDL_Color color;
     color.r=0;
